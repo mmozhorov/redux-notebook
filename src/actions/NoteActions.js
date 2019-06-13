@@ -1,9 +1,10 @@
 import * as types from "../constants/ActionNoteBookTypes";
 
-export function addNote(name) {
+export function addNote(title, description) {
     return {
         type : types.ADD_NOTE,
-        name
+        title,
+        description
     };
 }
 
