@@ -4,6 +4,8 @@ import { combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import * as reducers from '../reducers';
+import NotesList from './NotesList';
+import CreateNoteField from './CreateNoteField';
 
 const reducer = combineReducers(reducers);
 const store = createStore(
@@ -16,14 +18,17 @@ class App extends Component{
     render() {
 
 
-        store.dispatch(addNote('Подумать', "Подумать о границах нашего разума"));
+        // store.dispatch(addNote('Подумать', "Подумать о границах нашего разума"));
+        //
+        // store.dispatch(deleteNode(1));
 
-        store.dispatch(deleteNode(1));
+
 
         return(
             <Provider store={store}>
                 <div>
-                    Hello, World !!!
+                    <CreateNoteField/>
+                    <NotesList/>
                 </div>
             </Provider>
         )
