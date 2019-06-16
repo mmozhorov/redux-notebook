@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import { addNote, deleteNode, changeNode } from '../actions/NoteActions';
 import { combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import * as reducers from '../reducers';
 import NotesList from './NotesList';
 import CreateNoteField from './CreateNoteField';
+import 'bootstrap3/dist/css/bootstrap.css';
+
 
 const reducer = combineReducers(reducers);
 const store = createStore(
@@ -26,7 +27,7 @@ class App extends Component{
 
         return(
             <Provider store={store}>
-                <div>
+                <div className="container">
                     <CreateNoteField/>
                     <NotesList/>
                 </div>

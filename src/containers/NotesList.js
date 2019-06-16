@@ -1,26 +1,38 @@
 import React, {Component} from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as NoteActions from '../actions/NoteActions';
+import Notes from '../components/Notes';
+import CurrentNote from '../components/CurrentNote';
+import {changeActiveNote} from '../actions/CurrentNoteActions';
+
+const NotesBlock = {
+    marginTop : "30px",
+    paddingLeft : "unset",
+    paddingRight : "unset"
+};
+
 
 class NotesList extends Component{
-
     render() {
         return(
-            <div>
-                <ul>
-                    {this.props.notes.map( (item , i) => {
-                        return <li key={i}>{item.title}</li>
-                    })}
-                </ul>
+            <div className="container" style={NotesBlock}>
+                <div className="col-md-6">
+                    <Notes notes={this.props.notes} />
+                </div>
+                <div className="col-md-6">
+                    {this.props.currentNote.isActive ? <CurrentNote note={this.props.currentNote} /> : "Пожалуйста, выберите заметку"}
+                </div>
             </div>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    notes: state.notes.notes
+    notes: state.default.notes.notes,
+    currentNote: state.default.currentNote.currentNote
 });
 
 
-export default connect(mapStateToProps)(NotesList);
+
+export default connect(mapStateToProps, {changeActiveNote})(NotesList);
+
+

@@ -1,0 +1,7 @@
+.note-item{
+    cursor : pointer;
+}
+
+.note-item:hover{
+    background-color: aqua;
+}

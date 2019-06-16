@@ -26,23 +26,40 @@ class CreateNoteField extends Component{
     };
 
     createNote = (e) => {
-        this.props.addNote(this.state.title, this.state.description);
+        if (this.state.title !=="" && this.state.description !==""){
+            this.props.addNote(this.state.title, this.state.description);
+        }
+        else {
+            alert("Пожадуйста, заполните соответствующие поля");
+        }
     };
+
 
 
     render() {
         return (
-            <div>
-                <input type="text" placeholder="Наименование" onChange={this.handleTitle}/>
-                <textarea placeholder="Описание заметки" onChange={this.handleDescription}></textarea>
-                <button onClick={this.createNote}>Добавить заметку</button>
+            <div className="container">
+                <div className="form-group">
+                    <label htmlFor="inputsm">Название заметки:</label>
+                    <input className="form-control input-sm" id="inputsm" type="text" onChange={this.handleTitle}/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="exampleFormControlTextarea3">Описание заметки:</label>
+                    <textarea
+                        className="form-control"
+                        id="exampleFormControlTextarea3"
+                        rows="7"
+                        onChange={this.handleDescription}>
+                    </textarea>
+                </div>
+                <button onClick={this.createNote} className="btn btn-success">Добавить заметку</button>
             </div>
         );
     }
 }
 
 const mapStateToProps = state => ({
-    notes: state.notes.notes
+    notes: state.default.notes.notes
 });
 
 export default connect(mapStateToProps, {addNote})(CreateNoteField);
