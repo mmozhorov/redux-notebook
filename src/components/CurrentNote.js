@@ -5,19 +5,28 @@ class CurrentNote extends Component{
 
     constructor(props){
         super(props);
-
-        console.log(this.props);
-        let title = this.props.note.title;
-        let description = this.props.note.description;
+        this.state = {
+            note : this.props.note
+        };
 
     }
 
-
+    componentWillReceiveProps(nextProps) {
+                this.setState({
+                    note : nextProps.note
+                });
+    }
 
     handleTitle = (e) => {
-        console.log(e.target.value);
+
+        const note = {
+            ...this.state.note,
+        };
+
+        note.title = e.target.value;
+
         this.setState({
-            title : e.target.value
+            note : note
         });
     };
 
@@ -35,14 +44,14 @@ class CurrentNote extends Component{
                     <input className="form-control input-sm"
                            id="inputsm"
                            type="text"
-                           value={this.title}
+                           value={this.state.note.title}
                            onChange={this.handleTitle}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleFormControlTextarea3">Описание заметки:</label>
                     <textarea
                         onChange={this.handleDescription}
-                        value={this.description}
+                        value={this.state.note.description}
                         className="form-control"
                         id="exampleFormControlTextarea3"
                         rows="7">

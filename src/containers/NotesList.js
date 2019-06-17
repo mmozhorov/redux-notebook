@@ -11,15 +11,38 @@ const NotesBlock = {
 };
 
 
+
 class NotesList extends Component{
+
+    state = {
+        isActive : false,
+        currentNote : this.props.currentNote
+    };
+
+
+
+    handleActiveNote = (item) => {
+
+        this.props.changeActiveNote(item);
+
+        setTimeout( () => {
+            this.setState({
+                isActive : true,
+                currentNote : this.props.currentNote
+            });
+        }, 0);
+    };
+
+
+
     render() {
         return(
             <div className="container" style={NotesBlock}>
                 <div className="col-md-6">
-                    <Notes notes={this.props.notes} />
+                    <Notes notes={this.props.notes} handleActiveNote={ this.handleActiveNote } />
                 </div>
                 <div className="col-md-6">
-                    {this.props.currentNote.isActive ? <CurrentNote note={this.props.currentNote} /> : "Пожалуйста, выберите заметку"}
+                    {this.state.isActive ? <CurrentNote note={this.state.currentNote} /> : "..."}
                 </div>
             </div>
         )
