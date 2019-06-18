@@ -31,8 +31,15 @@ class CurrentNote extends Component{
     };
 
     handleDescription = (e) => {
+
+        const note = {
+            ...this.state.note,
+        };
+
+        note.description = e.target.value;
+
         this.setState({
-            description : e.target.value
+            note : note
         });
     };
 
@@ -57,7 +64,7 @@ class CurrentNote extends Component{
                         rows="7">
                     </textarea>
                 </div>
-                <button className="btn btn-warning btn-block note-change">Изменить</button>
+                <button onClick={ () => this.props.changeNote(this.state.note)} className="btn btn-warning btn-block note-change">Изменить</button>
             </div>
         );
     }

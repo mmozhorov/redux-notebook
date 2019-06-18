@@ -28,10 +28,18 @@ class CreateNoteField extends Component{
     createNote = (e) => {
         if (this.state.title !=="" && this.state.description !==""){
             this.props.addNote(this.state.title, this.state.description);
+            this.clearInput();
         }
         else {
             alert("Пожадуйста, заполните соответствующие поля");
         }
+    };
+
+    clearInput = () => {
+        this.setState({
+            title : "",
+            description : ""
+        })
     };
 
 
@@ -41,7 +49,7 @@ class CreateNoteField extends Component{
             <div className="container">
                 <div className="form-group">
                     <label htmlFor="inputsm">Название заметки:</label>
-                    <input className="form-control input-sm" id="inputsm" type="text" onChange={this.handleTitle}/>
+                    <input className="form-control input-sm" id="inputsm" type="text" onChange={this.handleTitle} value={this.state.title}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleFormControlTextarea3">Описание заметки:</label>
@@ -49,6 +57,7 @@ class CreateNoteField extends Component{
                         className="form-control"
                         id="exampleFormControlTextarea3"
                         rows="7"
+                        value={this.state.description}
                         onChange={this.handleDescription}>
                     </textarea>
                 </div>

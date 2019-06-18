@@ -15,9 +15,11 @@ export function deleteNode(id) {
     };
 }
 
-export function changeNode(id) {
+export function changeNode(note) {
     return {
         type : types.CHANGE_NOTE,
-        id
+        id : note.id,
+        title : note.title,
+        description : note.description
     }
 }

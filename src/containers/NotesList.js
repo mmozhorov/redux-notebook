@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Notes from '../components/Notes';
 import CurrentNote from '../components/CurrentNote';
 import {changeActiveNote} from '../actions/CurrentNoteActions';
+import {changeNode} from '../actions/NoteActions';
 
 const NotesBlock = {
     marginTop : "30px",
@@ -33,6 +34,13 @@ class NotesList extends Component{
         }, 0);
     };
 
+    changeNote = (item) => {
+        this.props.changeNode(item);
+        this.setState({
+            isActive : false
+        });
+    };
+
 
 
     render() {
@@ -42,7 +50,7 @@ class NotesList extends Component{
                     <Notes notes={this.props.notes} handleActiveNote={ this.handleActiveNote } />
                 </div>
                 <div className="col-md-6">
-                    {this.state.isActive ? <CurrentNote note={this.state.currentNote} /> : "..."}
+                    {this.state.isActive ? <CurrentNote note={this.state.currentNote} changeNote={this.changeNote} /> : "Выберите заметку"}
                 </div>
             </div>
         )
@@ -56,6 +64,6 @@ const mapStateToProps = state => ({
 
 
 
-export default connect(mapStateToProps, {changeActiveNote})(NotesList);
+export default connect(mapStateToProps, {changeActiveNote, changeNode})(NotesList);
 
 

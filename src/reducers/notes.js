@@ -1,4 +1,5 @@
 import * as types from '../constants/ActionNoteBookTypes';
+import v1 from 'uuid';
 
 const initialState = {
     notes : [
@@ -33,7 +34,7 @@ const initialState = {
 export default function notes(state = initialState, action) {
     switch (action.type) {
         case types.ADD_NOTE:
-            const newId = (state.notes.length-1)+1;
+            const newId = v1();
             const newNote = {
                 id : newId,
                 title : action.title,
@@ -45,6 +46,28 @@ export default function notes(state = initialState, action) {
                     ...state.notes,
                     newNote
                 ]
+            };
+
+        case types.CHANGE_NOTE:
+
+            const changeNote = {
+                id : action.id,
+                title : action.title,
+                description : action.description
+            };
+
+            const newNotesList = state.notes.map( (item) => {
+                if (changeNote.id === item.id) {
+                    return changeNote
+                }
+                else {
+                    return item;
+                }
+            });
+
+            return {
+                ...state,
+                notes : newNotesList
             };
 
         case types.DELETE_NOTE:
