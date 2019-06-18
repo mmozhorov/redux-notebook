@@ -5,3 +5,11 @@
 .note-item:hover{
     background-color: aqua;
 }
+
+.glyphicon-trash{
+    float: right;
+}
+
+.glyphicon-trash:hover{
+    color: red;
+}
